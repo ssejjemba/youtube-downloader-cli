@@ -4,6 +4,10 @@ import (
 	"fmt"
 )
 
+func NewYoutube() *Youtube {
+	return new(Youtube)
+}
+
 type stream map[string]string
 
 type Youtube struct {
