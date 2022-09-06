@@ -11,7 +11,7 @@ import (
 )
 
 func (y *Youtube) getVideoInfo() error {
-	url := "https://youtube.com/get_video_info?video_id=" + y.VideoID
+	url := "http://youtube.com/get_video_info?video_id=" + y.VideoID
 	log.Printf("url: %s", url)
 
 	response, err := http.Get(url)
