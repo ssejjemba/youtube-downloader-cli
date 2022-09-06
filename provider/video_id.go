@@ -28,7 +28,7 @@ func (y *Youtube) findVideoId(url string) error{
 	}
 
 	log.Printf("Found video id: '%s'", videoId)
-	y.videoID = videoId
+	y.VideoID = videoId
 
 	return validateVideoId(videoId)
 }

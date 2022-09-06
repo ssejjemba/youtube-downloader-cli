@@ -11,7 +11,7 @@ import (
 )
 
 func (y *Youtube) getVideoInfo() error {
-	url := "http://youtube.com/get_video_info?video_id=" + y.videoID
+	url := "http://youtube.com/get_video_info?video_id=" + y.VideoID
 	log.Printf("url: %s", url)
 
 	response, err := http.Get(url)
@@ -29,12 +29,12 @@ func (y *Youtube) getVideoInfo() error {
 		return err
 	}
 
-	y.videoInfo = string(body)
+	y.VideoInfo = string(body)
 	return nil
 }
 
 func (y *Youtube) parseVideoInfo() error {
-	answer, err := url.ParseQuery(y.videoInfo)
+	answer, err := url.ParseQuery(y.VideoInfo)
 	if err != nil {
 		return err
 	}
