@@ -1,9 +1,11 @@
 package provider
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"log"
+	"strings"
 )
 
 func NewYoutube(debug bool) *Youtube {
@@ -53,6 +55,28 @@ func (y *Youtube) StartDownload(destFile string) error {
 		if err == nil {
 			break
 		}
+	}
+	return err
+}
+
+func (y *Youtube) StartDownloadWithQuality(destFile string, quality string) error {
+	//download highest resolution on [0]
+	err := errors.New("Empty stream list")
+	for _, v := range y.StreamList {
+		if strings.Compare(v["quality"], quality) == 0 {
+			url := v["url"]
+			y.log(fmt.Sprintln("Download url=", url))
+
+			y.log(fmt.Sprintln("Download to file=", destFile))
+			err = y.videoDLWorker(destFile, url)
+			if err == nil {
+				break
+			}
+		}
+	}
+
+	if err != nil {
+		return y.StartDownload(destFile)
 	}
 	return err
 }
