@@ -6,13 +6,14 @@ import (
 	"log"
 )
 
-func NewYoutube() *Youtube {
-	return &Youtube{DownloadPercentage: make(chan int64, 100)}
+func NewYoutube(debug bool) *Youtube {
+	return &Youtube{DebugMode: debug, DownloadPercentage: make(chan int64, 100)}
 }
 
 type stream map[string]string
 
 type Youtube struct {
+	DebugMode bool
 	StreamList []stream
 	VideoID string
 	VideoInfo string
@@ -59,3 +60,9 @@ func SetLogOutput(w io.Writer) {
 	log.SetOutput(w)
 }
 
+// Values logged with this will only show in debug mode
+func (y *Youtube) log(logText string) {
+	if y.DebugMode {
+		log.Println(logText)
+	}
+}
