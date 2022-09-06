@@ -36,7 +36,7 @@ func (y *Youtube) videoDLWorker(destFile string, target string) error {
 	}
 
 	// create dir structure if none exists
-	err = os.MkdirAll(filepath.Dir(destFile), 666)
+	err = os.MkdirAll(filepath.Dir(destFile), 0755)
 	if err != nil {
 		return err
 	}
