@@ -1,6 +1,8 @@
 package provider
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type stream map[string]string
 
@@ -15,4 +17,7 @@ func (y *Youtube) DecodeURL(url string) error {
 	if err != nil {
 		return fmt.Errorf("findvideoID error=%s", err)
 	}
+
+	return nil
 }
+
