@@ -18,6 +18,11 @@ func (y *Youtube) DecodeURL(url string) error {
 		return fmt.Errorf("findvideoID error=%s", err)
 	}
 
+	err = y.getVideoInfo()
+	if err != nil {
+		return fmt.Errorf("getVideoInfo error=%s", err)
+	}
+
 	return nil
 }
 
