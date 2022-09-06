@@ -83,13 +83,23 @@ func (y *Youtube) parseVideoInfo() error {
 			sig = stream_qry["sig"][0]
 		}
 
+		var title string
+		var author string
+
+		if len(answer["title"]) > 0 {
+			title = answer["title"][0]
+		}
+		if len(answer["author"]) > 0 {
+			author = answer["author"][0]
+		}
+
 		stream := stream{
 			"quality": stream_qry["quality"][0],
 			"type":    stream_qry["type"][0],
 			"url":     stream_qry["url"][0],
 			"sig":     sig,
-			"title":   answer["title"][0],
-			"author":  answer["author"][0],
+			"title":   title,
+			"author":  author,
 		}
 		streams = append(streams, stream)
 		log.Printf("Stream found: quality '%s', format '%s'", stream_qry["quality"][0], stream_qry["type"][0])
