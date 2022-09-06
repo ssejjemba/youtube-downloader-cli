@@ -2,6 +2,7 @@ package provider
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"os"
 )
@@ -48,5 +49,9 @@ func (y *Youtube) StartDownload(dstDir string) error {
 	log.Println("Download to file=", targetFile)
 	err := videoDLWorker(targetFile, url)
 	return err
+}
+
+func SetLogOutput(w io.Writer) {
+	log.SetOutput(w)
 }
 
