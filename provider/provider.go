@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"os"
 )
 
 func NewYoutube() *Youtube {
@@ -42,17 +41,17 @@ func (y *Youtube) DecodeURL(url string) error {
 	return nil
 }
 
-func (y *Youtube) StartDownload(dstDir string) error {
+func (y *Youtube) StartDownload(destFile string) error {
 	// y.DownloadPercentage = make(chan int64, 100)
 	//download highest resolution on [0]
 	targetStream := y.StreamList[0]
 	url := targetStream["url"] + "&signature=" + targetStream["sig"]
 	log.Println("Download url=", url)
 
-	targetFile := fmt.Sprintf("%s%c%s.%s", dstDir, os.PathSeparator, targetStream["title"], "mp4")
+	// targetFile := fmt.Sprintf("%s%c%s.%s", dstDir, os.PathSeparator, targetStream["title"], "mp4")
 	//targetStream["title"], targetStream["author"])
-	log.Println("Download to file=", targetFile)
-	err := y.videoDLWorker(targetFile, url)
+	log.Println("Download to file=", destFile)
+	err := y.videoDLWorker(destFile, url)
 	return err
 }
 
