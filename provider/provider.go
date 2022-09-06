@@ -8,7 +8,7 @@ import (
 )
 
 func NewYoutube() *Youtube {
-	return new(Youtube)
+	return &Youtube{DownloadPercentage: make(chan int64, 100)}
 }
 
 type stream map[string]string
@@ -43,7 +43,7 @@ func (y *Youtube) DecodeURL(url string) error {
 }
 
 func (y *Youtube) StartDownload(dstDir string) error {
-	y.DownloadPercentage = make(chan int64, 100)
+	// y.DownloadPercentage = make(chan int64, 100)
 	//download highest resolution on [0]
 	targetStream := y.StreamList[0]
 	url := targetStream["url"] + "&signature=" + targetStream["sig"]
