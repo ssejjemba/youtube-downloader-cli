@@ -23,6 +23,8 @@ func main() {
 	flag.StringVar(&outputFile, "o", "sample.mp4", "The output file name")
 	var outputDir string
 	flag.StringVar(&outputDir, "d", filepath.Join(usr.HomeDir, "Movies", "ytd"), "The output directory")
+	var outputQuality string
+	flag.StringVar(&outputQuality, "q", "", "The output file quality (hd720, medium)")
 	flag.Parse()
 	log.Println(flag.Args())
 
@@ -33,8 +35,15 @@ func main() {
 	if err := y.DecodeURL(arg); err != nil {
 		fmt.Println("error found: ", err)
 	}
+
+	var err error
+	if len(outputQuality) > 0 {
+		err = y.StartDownloadWithQuality(filepath.Join(outputDir, outputFile), outputQuality)
+	} else {
+		err = y.StartDownload(filepath.Join(outputDir, outputFile))
+	}
 	
-	if err := y.StartDownload(filepath.Join(outputDir, outputFile)); err != nil {
+	if  err != nil {
 		fmt.Println("err:", err)
 	}
 
