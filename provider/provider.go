@@ -2,6 +2,7 @@ package provider
 
 import (
 	"fmt"
+	"log"
 )
 
 func NewYoutube() *Youtube {
@@ -33,5 +34,18 @@ func (y *Youtube) DecodeURL(url string) error {
 	}
 
 	return nil
+}
+
+func (y *Youtube) StartDownload(dstDir string) error {
+	//download highest resolution on [0]
+	targetStream := y.StreamList[0]
+	url := targetStream["url"] + "&signature=" + targetStream["sig"]
+	log.Println("Download url=", url)
+
+	targetFile := fmt.Sprintf("%s/%s.%s", dstDir, targetStream["title"], "mp4")
+	//targetStream["title"], targetStream["author"])
+	log.Println("Download to file=", targetFile)
+	err := videoDLWorker(targetFile, url)
+	return err
 }
 
