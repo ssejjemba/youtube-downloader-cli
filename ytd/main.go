@@ -34,6 +34,7 @@ func main() {
 
 	if err := y.DecodeURL(arg); err != nil {
 		fmt.Println("error found: ", err)
+		// TODO: should stop execution
 	}
 
 	var err error
@@ -45,6 +46,7 @@ func main() {
 	
 	if  err != nil {
 		fmt.Println("err:", err)
+		// TODO: should stop execution
 	}
 
 }

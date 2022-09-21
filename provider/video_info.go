@@ -93,7 +93,8 @@ func (y *Youtube) parseVideoInfo() error {
 			author = answer["author"][0]
 		}
 
-		stream := stream{
+		// TODO: use struct instead of map
+		strm := stream{
 			"quality": stream_qry["quality"][0],
 			"type":    stream_qry["type"][0],
 			"url":     stream_qry["url"][0],
@@ -101,7 +102,7 @@ func (y *Youtube) parseVideoInfo() error {
 			"title":   title,
 			"author":  author,
 		}
-		streams = append(streams, stream)
+		streams = append(streams, strm)
 		log.Printf("Stream found: quality '%s', format '%s'", stream_qry["quality"][0], stream_qry["type"][0])
 	}
 

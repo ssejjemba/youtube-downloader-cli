@@ -14,6 +14,8 @@ func NewYoutube(debug bool) *Youtube {
 
 type stream map[string]string
 
+
+// TODO: Use consistent casing
 type Youtube struct {
 	DebugMode bool
 	StreamList []stream
